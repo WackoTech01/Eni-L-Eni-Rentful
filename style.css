@@ -1,0 +1,332 @@
+/* =========================================================
+   Eni'L'Eni Rentful — Design tokens
+   Concept: an independent landlord's rent ledger & receipt book.
+   Ink navy + parchment paper + ledger green + rust ink-stamp accent.
+   ========================================================= */
+
+:root{
+  --ink:        #1B2A41;   /* navy ink — headers, footer */
+  --ink-soft:   #2C3E58;
+  --paper:      #F7F3EA;   /* parchment page background */
+  --paper-line: #E4DCC8;   /* faint ruled line on paper */
+  --white:      #FFFDF8;
+  --ledger:     #2F6F4E;   /* confident green — money, "paid" */
+  --ledger-dark:#234F38;
+  --stamp:      #B5542B;   /* rust ink-stamp accent */
+  --text:       #2A2E33;
+  --text-soft:  #5B6470;
+  --border:     #D8CFB8;
+
+  --display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --body:    "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono:    "IBM Plex Mono", "Courier New", monospace;
+}
+
+*{ box-sizing: border-box; }
+
+html{ scroll-behavior: smooth; }
+
+body{
+  font-family: var(--body);
+  color: var(--text);
+  background: var(--paper);
+  line-height: 1.6;
+}
+
+h1, h2, h3, .display{
+  font-family: var(--display);
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.eyebrow{
+  font-family: var(--mono);
+  font-size: .78rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--stamp);
+}
+
+a{ color: inherit; text-decoration: none; }
+
+/* ---------- Ledger ruled-paper texture for alt sections ---------- */
+.ruled{
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 38px,
+    var(--paper-line) 39px
+  );
+}
+
+/* ---------- Navbar ---------- */
+.rf-navbar{
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: .9rem 0;
+}
+.rf-logo{
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+}
+.rf-logo .mark{
+  width: 34px; height: 34px;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: .85rem;
+  color: var(--ledger);
+  transform: rotate(-4deg);
+}
+.rf-nav-link{
+  font-size: .93rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  padding: .5rem .9rem !important;
+  position: relative;
+}
+.rf-nav-link.active,
+.rf-nav-link:hover{ color: var(--ledger-dark); }
+.rf-nav-link.active::after{
+  content: "";
+  position: absolute;
+  left: .9rem; right: .9rem; bottom: .1rem;
+  border-bottom: 2px dashed var(--stamp);
+}
+.btn-outline-ink{
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: .88rem;
+  padding: .45rem 1.1rem;
+  border-radius: 999px;
+  transition: all .18s ease;
+}
+.btn-outline-ink:hover{ background: var(--ink); color: var(--white); }
+.btn-ledger{
+  background: var(--ledger);
+  color: var(--white) !important;
+  font-weight: 600;
+  font-size: .88rem;
+  padding: .5rem 1.2rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--ledger);
+  transition: all .18s ease;
+}
+.btn-ledger:hover{ background: var(--ledger-dark); border-color: var(--ledger-dark); color: var(--white); }
+
+/* ---------- Hero ---------- */
+.rf-hero{
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(27,42,65,.72), rgba(27,42,65,.82)),
+    url("https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1600&auto=format&fit=crop")
+    center/cover no-repeat;
+  color: var(--white);
+  padding: 7rem 0 6rem;
+  overflow: hidden;
+}
+.rf-hero::after{
+  /* torn-paper edge separating hero from the page below */
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -1px; height: 26px;
+  background: var(--paper);
+  clip-path: polygon(0% 100%, 2% 30%, 5% 90%, 8% 20%, 11% 80%, 14% 10%, 17% 70%, 20% 25%, 23% 85%, 26% 15%,
+    29% 75%, 32% 20%, 35% 90%, 38% 10%, 41% 70%, 44% 30%, 47% 85%, 50% 15%, 53% 75%, 56% 25%,
+    59% 90%, 62% 10%, 65% 70%, 68% 20%, 71% 85%, 74% 15%, 77% 75%, 80% 25%, 83% 90%, 86% 10%,
+    89% 70%, 92% 20%, 95% 85%, 98% 15%, 100% 100%);
+}
+.rf-hero h1{
+  color: var(--white);
+  font-size: clamp(2.3rem, 4.4vw, 3.6rem);
+  line-height: 1.08;
+  max-width: 15ch;
+}
+.rf-hero p{
+  color: #E7E2D6;
+  font-size: 1.12rem;
+  max-width: 46ch;
+}
+.rf-hero .eyebrow{ color: #EBC6B3; }
+
+/* ---------- Receipt stub (signature element) ---------- */
+.receipt{
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  position: relative;
+  box-shadow: 0 18px 40px -22px rgba(27,42,65,.35);
+}
+.receipt::before,
+.receipt::after{
+  content: "";
+  position: absolute;
+  width: 22px; height: 22px;
+  background: var(--paper);
+  border-radius: 50%;
+  top: 50%; transform: translateY(-50%);
+}
+.receipt::before{ left: -11px; }
+.receipt::after{ right: -11px; }
+.receipt-line{
+  border-bottom: 1px dashed var(--border);
+  padding: .85rem 1.5rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--mono);
+  font-size: .92rem;
+}
+.receipt-line:last-child{ border-bottom: none; }
+.receipt-line .label{ color: var(--text-soft); }
+.receipt-line .val{ color: var(--ink); font-weight: 600; }
+
+/* ---------- Ink stamp badge ---------- */
+.stamp{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 84px; height: 84px;
+  border: 2.5px solid var(--stamp);
+  border-radius: 50%;
+  color: var(--stamp);
+  font-size: 1.6rem;
+  transform: rotate(-8deg);
+  background: rgba(181,84,43,.05);
+}
+
+/* ---------- Cards ---------- */
+.rf-card{
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 2rem 1.75rem;
+  height: 100%;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.rf-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 20px 34px -22px rgba(27,42,65,.3);
+}
+
+/* ---------- Section spacing ---------- */
+.section{ padding: 5.5rem 0; }
+.section-ink{ background: var(--ink); color: #E7E2D6; }
+.section-ink h2{ color: var(--white); }
+
+/* ---------- Perforation divider ---------- */
+.perforation{
+  border: none;
+  border-top: 2px dashed var(--border);
+  margin: 0;
+}
+
+/* ---------- Footer ---------- */
+.rf-footer{
+  background: var(--ink);
+  color: #B9C2CF;
+  padding: 4rem 0 1.75rem;
+}
+.rf-footer h5{
+  font-family: var(--display);
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+.rf-footer a:hover{ color: var(--white); }
+.rf-social{
+  width: 38px; height: 38px;
+  border: 1px solid #3E4E63;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #E7E2D6;
+  transition: all .18s ease;
+}
+.rf-social:hover{ background: var(--ledger); border-color: var(--ledger); }
+.rf-newsletter input{
+  background: transparent;
+  border: 1px solid #3E4E63;
+  color: var(--white);
+  border-radius: 999px 0 0 999px;
+}
+.rf-newsletter input::placeholder{ color: #8A95A4; }
+.rf-newsletter .btn{
+  border-radius: 0 999px 999px 0;
+}
+.footer-bottom{
+  border-top: 1px solid #33415A;
+  margin-top: 3rem;
+  padding-top: 1.25rem;
+  font-size: .85rem;
+  color: #8A95A4;
+}
+
+/* ---------- Page header (inner pages) ---------- */
+.page-head{
+  background:
+    linear-gradient(180deg, rgba(27,42,65,.86), rgba(27,42,65,.9)),
+    url("https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=1600&auto=format&fit=crop")
+    center/cover no-repeat;
+  color: var(--white);
+  padding: 4.5rem 0 3.5rem;
+}
+.page-head h1{ color: var(--white); }
+
+/* ---------- Table (ledger style) ---------- */
+.ledger-table{
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.ledger-table thead{
+  background: var(--ink);
+  color: var(--white);
+  font-family: var(--mono);
+  font-size: .8rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.ledger-table td, .ledger-table th{ vertical-align: middle; padding: .9rem 1rem; }
+.badge-paid{ background: rgba(47,111,78,.12); color: var(--ledger-dark); font-weight: 600; }
+.badge-due{ background: rgba(181,84,43,.12); color: var(--stamp); font-weight: 600; }
+
+/* ---------- Form ---------- */
+.rf-form label{ font-family: var(--mono); font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; color: var(--text-soft); }
+.rf-form .form-control, .rf-form .form-select{
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  padding: .7rem .9rem;
+  background: var(--white);
+}
+.rf-form .form-control:focus, .rf-form .form-select:focus{
+  border-color: var(--ledger);
+  box-shadow: 0 0 0 3px rgba(47,111,78,.14);
+}
+
+/* ---------- Announcement notice card ---------- */
+.notice{
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--stamp);
+  border-radius: 6px;
+  padding: 1.5rem 1.75rem;
+}
+.notice .date{ font-family: var(--mono); font-size: .78rem; color: var(--text-soft); }
+
+@media (max-width: 767px){
+  .rf-hero{ padding: 5rem 0 4.5rem; }
+  .section{ padding: 3.5rem 0; }
+}
